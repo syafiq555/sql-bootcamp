@@ -107,13 +107,13 @@
             background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
         }
         .instructor-name {
-            font-size: 2.5em;
+            font-size: 0.9em;
             font-weight: 700;
             letter-spacing: 0.02em;
             margin-bottom: 0.2em;
         }
         .instructor-title {
-            font-size: 1.3em;
+            font-size: 0.5em;
             color: #a0a0a0;
             position: relative;
             display: inline-block;
@@ -131,8 +131,8 @@
         .credentials-grid {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin: 40px 0 60px 0;
+            gap: 15px;
+            margin: 15px 0 20px 0;
             flex-wrap: wrap;
         }
         .credential-item {
@@ -140,66 +140,67 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            min-width: 120px;
-            max-width: 140px;
+            min-width: 45px;
+            max-width: 50px;
         }
         .credential-icon-wrapper {
-            width: 80px;
-            height: 80px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: rgba(88, 196, 220, 0.1);
             border-radius: 50%;
-            margin-bottom: 12px;
+            margin-bottom: 4px;
             transition: all 0.3s ease;
         }
         .credential-icon-wrapper:hover {
-            transform: translateY(-5px);
+            transform: translateY(-2px);
             background: rgba(88, 196, 220, 0.15);
         }
         .credential-icon {
-            font-size: 3em;
+            font-size: 1em;
             color: #58c4dc;
             text-shadow: 0 0 20px rgba(88, 196, 220, 0.4);
         }
         .credential-label {
-            font-size: 0.7em;
+            font-size: 0.35em;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: #888;
+            line-height: 1.2;
         }
         .experience-section {
             background: rgba(88, 196, 220, 0.05);
             border-left: 4px solid #58c4dc;
-            padding: 25px 30px;
+            padding: 10px 12px;
             border-radius: 8px;
-            margin-top: 30px;
+            margin-top: 10px;
         }
         .experience-item {
-            font-size: 1em;
-            line-height: 2;
-            margin-bottom: 0.8em;
+            font-size: 0.5em;
+            line-height: 1.4;
+            margin-bottom: 0.3em;
             list-style: none;
         }
         .experience-item::before {
             content: '▸';
             color: #58c4dc;
             font-size: 1.2em;
-            margin-right: 10px;
+            margin-right: 5px;
         }
         .instructor-quote {
             font-style: italic;
             color: #58c4dc;
-            font-size: 1.1em;
+            font-size: 0.5em;
             border-top: 1px solid rgba(88, 196, 220, 0.3);
-            padding-top: 30px;
-            margin-top: 40px;
+            padding-top: 10px;
+            margin-top: 15px;
         }
         @media (max-width: 768px) {
-            .instructor-name { font-size: 2em; }
-            .credentials-grid { gap: 25px; }
-            .credential-item { min-width: 100px; }
+            .instructor-name { font-size: 0.8em; }
+            .credentials-grid { gap: 10px; }
+            .credential-item { min-width: 40px; }
         }
     </style>
 </head>
@@ -220,9 +221,9 @@
 
             <!-- INSTRUCTOR BIO -->
             <section class="instructor-slide">
-                <h2 style="font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 40px;">Meet Your Instructor</h2>
+                <h2 style="font-size: 0.4em; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 15px;">Meet Your Instructor</h2>
 
-                <div style="margin: 40px 0;">
+                <div style="margin: 15px 0;">
                     <h1 class="instructor-name">Syafiq Shamsuddin</h1>
                     <p class="instructor-title">Senior Software Developer</p>
                 </div>
@@ -261,7 +262,7 @@
                 </div>
 
                 <div class="experience-section">
-                    <h3 style="font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 20px; color: #58c4dc;">Real-World Experience</h3>
+                    <h3 style="font-size: 0.5em; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; color: #58c4dc;">Real-World Experience</h3>
                     <ul style="list-style: none; padding: 0; margin: 0;">
                         <li class="experience-item">Multi-tenant SaaS platforms</li>
                         <li class="experience-item">E-commerce & payment systems</li>
