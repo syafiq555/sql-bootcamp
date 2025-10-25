@@ -13,7 +13,7 @@ This is a **SQL/MSSQL 2-Day Bootcamp** training materials repository containing:
 ### Presentation Structure (slides.html)
 
 **Technology Stack:**
-- **reveal.js** (CDN): Framework for slide deck creation
+- **reveal.js v5.2.1** (CDN): Framework for slide deck creation (upgraded from v4.5.0 to fix GitHub Pages speaker notes issues)
 - **highlight.js** (CDN): SQL syntax highlighting
 - **Mermaid** (CDN): Diagram rendering (for potential future enhancements)
 - **Dark theme**: GitHub-dark code styling for visual appeal
@@ -119,9 +119,21 @@ Refer to README when:
 4. Check code highlighting renders properly
 5. Test at expected presentation dimensions (16:9 or 4:3)
 
+## Deployment & Known Issues
+
+**GitHub Pages Hosting:**
+- Presentation is deployed at: https://syafiq555.github.io/sql-bootcamp/
+- Uses reveal.js v5.2.1 (upgraded 2025-10-26) to fix speaker notes plugin compatibility with GitHub Pages
+- Speaker notes work correctly when pressing 'S' key on production site
+
+**Local Development:**
+- Open `docs/index.html` directly in browser (file:// protocol works fine with reveal.js v5)
+- Speaker notes fully functional locally
+
 ## Notes for Future Sessions
 
 - **CSS Maintenance**: Font sizes tuned for readability + fit. Don't reduce below 0.42em in dense layouts
 - **Speaker Notes**: Typically 2-3 sentences per slide (time budget ~2-3min per slide)
 - **Lab Time**: Built-in 40-60min per session; slides flag lab sections
 - **Quiz Frequency**: Every session ends with 10-15min quiz (diagnostic, not graded formally)
+- **Version Updates**: reveal.js v5.2.1 maintains backward compatibility with v4 syntax; minimal code changes needed for future upgrades
