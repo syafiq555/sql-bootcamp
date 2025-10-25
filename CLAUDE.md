@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a **SQL/MSSQL 2-Day Bootcamp** training materials repository containing:
 - **Design document** (`README.md`): Comprehensive pedagogical framework covering learning progression, session breakdown, real-world use cases, and success metrics
-- **Presentation** (`slides.html`): Self-contained reveal.js HTML presentation with 52 interactive slides
+- **Presentation** (`docs/index.html`): Self-contained reveal.js HTML presentation with 52 interactive slides
 
 ## Architecture Overview
 
@@ -37,7 +37,7 @@ The bootcamp implements **SQLite → MSSQL progression**:
 ### Preview Slides
 ```bash
 # Open directly in browser (no server required)
-file:///C:\Users\f2tsb\OneDrive\Documents\bootcamp\slides.html
+file:///C:\Users\f2tsb\OneDrive\Documents\bootcamp\docs\index.html
 ```
 
 **Navigation:**
@@ -113,7 +113,7 @@ Refer to README when:
 
 ## Testing Before Presentation
 
-1. Open `slides.html` in modern browser (Chrome, Edge, Firefox)
+1. Open `docs/index.html` in modern browser (Chrome, Edge, Firefox)
 2. Navigate through all sessions (ensure no content overflow)
 3. Press 'S' to verify speaker notes appear correctly
 4. Check code highlighting renders properly

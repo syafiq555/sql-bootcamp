@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .reveal h1, .reveal h2, .reveal h3 { text-transform: none; }
         .reveal pre { width: 100%; font-size: 0.55em; }
@@ -32,6 +33,174 @@
             min-width: 0; /* Prevent flex children from overflowing */
         }
         .note-box { background: rgba(100,200,255,0.1); padding: 15px; border-left: 4px solid #58c4dc; margin: 10px 0; }
+        /* Mermaid diagram styling */
+        .reveal .mermaid {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 90%;
+            display: flex;
+            justify-content: center;
+        }
+        .reveal .mermaid svg {
+            max-height: 600px;
+            max-width: 100%;
+        }
+        /* Speaker notes markdown styling */
+        aside.notes {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        aside.notes h2 {
+            color: #58c4dc;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            border-bottom: 2px solid rgba(88, 196, 220, 0.3);
+            padding-bottom: 4px;
+        }
+        aside.notes h3 {
+            color: #51cf66;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 12px;
+            margin-bottom: 6px;
+        }
+        aside.notes p {
+            margin: 6px 0;
+            text-align: left;
+        }
+        aside.notes ul, aside.notes ol {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        aside.notes li {
+            margin: 4px 0;
+            text-align: left;
+        }
+        aside.notes strong {
+            color: #ffb900;
+            font-weight: bold;
+        }
+        aside.notes em {
+            color: #88ddff;
+            font-style: italic;
+        }
+        aside.notes code {
+            background: rgba(88, 196, 220, 0.2);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #58c4dc;
+        }
+        aside.notes blockquote {
+            border-left: 4px solid #ffb900;
+            padding-left: 12px;
+            margin: 10px 0;
+            color: #ffb900;
+            font-style: italic;
+        }
+        /* Instructor slide hero styling */
+        .instructor-slide {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        }
+        .instructor-name {
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            margin-bottom: 0.2em;
+        }
+        .instructor-title {
+            font-size: 1.3em;
+            color: #a0a0a0;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5em;
+        }
+        .instructor-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #58c4dc 0%, transparent 100%);
+        }
+        .credentials-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 40px 0 60px 0;
+            flex-wrap: wrap;
+        }
+        .credential-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-width: 120px;
+            max-width: 140px;
+        }
+        .credential-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(88, 196, 220, 0.1);
+            border-radius: 50%;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+        .credential-icon-wrapper:hover {
+            transform: translateY(-5px);
+            background: rgba(88, 196, 220, 0.15);
+        }
+        .credential-icon {
+            font-size: 3em;
+            color: #58c4dc;
+            text-shadow: 0 0 20px rgba(88, 196, 220, 0.4);
+        }
+        .credential-label {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #888;
+        }
+        .experience-section {
+            background: rgba(88, 196, 220, 0.05);
+            border-left: 4px solid #58c4dc;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+        .experience-item {
+            font-size: 1em;
+            line-height: 2;
+            margin-bottom: 0.8em;
+            list-style: none;
+        }
+        .experience-item::before {
+            content: '▸';
+            color: #58c4dc;
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+        .instructor-quote {
+            font-style: italic;
+            color: #58c4dc;
+            font-size: 1.1em;
+            border-top: 1px solid rgba(88, 196, 220, 0.3);
+            padding-top: 30px;
+            margin-top: 40px;
+        }
+        @media (max-width: 768px) {
+            .instructor-name { font-size: 2em; }
+            .credentials-grid { gap: 25px; }
+            .credential-item { min-width: 100px; }
+        }
     </style>
 </head>
 <body>
@@ -46,6 +215,69 @@
                 <aside class="notes">
                     Welcome to the SQL bootcamp! This is a 2-day intensive covering beginner to advanced SQL topics.
                     By the end, you'll understand database design, write complex queries, and optimize for performance.
+                </aside>
+            </section>
+
+            <!-- INSTRUCTOR BIO -->
+            <section class="instructor-slide">
+                <h2 style="font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.1em; color: #888; margin-bottom: 40px;">Meet Your Instructor</h2>
+
+                <div style="margin: 40px 0;">
+                    <h1 class="instructor-name">Syafiq Shamsuddin</h1>
+                    <p class="instructor-title">Senior Software Developer</p>
+                </div>
+
+                <div class="credentials-grid">
+                    <div class="credential-item">
+                        <div class="credential-icon-wrapper">
+                            <i class="fas fa-graduation-cap credential-icon"></i>
+                        </div>
+                        <span class="credential-label">UTM CS<br>3.73 GPA</span>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon-wrapper">
+                            <i class="fas fa-briefcase credential-icon"></i>
+                        </div>
+                        <span class="credential-label">6+ Years<br>Experience</span>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon-wrapper">
+                            <i class="fas fa-database credential-icon"></i>
+                        </div>
+                        <span class="credential-label">Daily<br>MySQL/PostgreSQL</span>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon-wrapper">
+                            <i class="fas fa-chalkboard-user credential-icon"></i>
+                        </div>
+                        <span class="credential-label">Teaching &<br>Mentoring</span>
+                    </div>
+                    <div class="credential-item">
+                        <div class="credential-icon-wrapper">
+                            <i class="fas fa-rocket credential-icon"></i>
+                        </div>
+                        <span class="credential-label">20+ Database<br>Applications</span>
+                    </div>
+                </div>
+
+                <div class="experience-section">
+                    <h3 style="font-size: 1em; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 20px; color: #58c4dc;">Real-World Experience</h3>
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li class="experience-item">Multi-tenant SaaS platforms</li>
+                        <li class="experience-item">E-commerce & payment systems</li>
+                        <li class="experience-item">Property management systems</li>
+                        <li class="experience-item">Accounting & e-invoicing integration</li>
+                    </ul>
+                </div>
+
+                <p class="instructor-quote">"I use SQL every day to solve real business problems. Let's learn together!"</p>
+
+                <aside class="notes">
+                    Introduce yourself briefly (2 minutes max). Emphasize:
+                    - Hands-on production experience with real systems
+                    - Practical focus: you'll learn what actually works
+                    - Teaching experience: comfortable with questions and different paces
+                    - This bootcamp is grounded in real-world scenarios you've built
                 </aside>
             </section>
 
@@ -103,6 +335,26 @@
                 <aside class="notes">
                     Start with familiar context - everyone uses Netflix.
                     This shows why databases and SQL matter in real apps.
+                    Diagram follows on next slide to show the table structure.
+                </aside>
+            </section>
+
+            <!-- NETFLIX SCHEMA DIAGRAM -->
+            <section>
+                <h2>Netflix Database Structure</h2>
+                <div class="mermaid">
+erDiagram
+    WATCH_HISTORY {
+        int user_id PK
+        int movie_id PK
+        date watch_date
+        int duration_minutes
+    }
+                </div>
+                <p style="margin-top: 20px; font-size: 0.85em;">Simple, clean table structure: each row = one watch event</p>
+                <aside class="notes">
+                    The diagram shows the table structure: each record is a watch event with user, movie, date, and duration.
+                    This is the foundation for all our Session 1 queries.
                 </aside>
             </section>
 
@@ -259,7 +511,7 @@ FROM orders
 GROUP BY region
 ORDER BY total_sales DESC;</code></pre>
                 </div>
-                <p style="margin-top: 20px; font-size: 0.85em; color: #ff6b6b;">
+                <p style="margin-top: 20px; font-size: 0.5em; color: #ff6b6b;">
                     ⚠️ Rule: Non-aggregated columns must be in GROUP BY
                 </p>
                 <aside class="notes">
@@ -275,11 +527,37 @@ ORDER BY total_sales DESC;</code></pre>
                 <div class="note-box" style="margin-top: 30px;">
                     <p><strong>customers table:</strong> customer_id, name</p>
                     <p><strong>orders table:</strong> order_id, customer_id, amount</p>
-                    <p style="margin-top: 15px; font-size: 0.85em;">→ customer_id links them together</p>
+                    <p style="margin-top: 15px; font-size: 0.5em;">→ customer_id links them together</p>
                 </div>
                 <aside class="notes">
                     JOINs combine rows from multiple tables based on a relationship (key).
                     This is core to relational databases.
+                    Diagram follows to show the relationship visually.
+                </aside>
+            </section>
+
+            <!-- CUSTOMERS ORDERS SCHEMA -->
+            <section>
+                <h2>Database Relationship: Customers & Orders</h2>
+                <div class="mermaid">
+erDiagram
+    CUSTOMERS ||--o{ ORDERS : "places"
+    CUSTOMERS {
+        int customer_id PK
+        string name
+        string email
+    }
+    ORDERS {
+        int order_id PK
+        int customer_id FK
+        decimal amount
+        date order_date
+    }
+                </div>
+                <p style="margin-top: 20px; font-size: 0.85em;">One customer can have many orders (1:M relationship). Foreign key = customer_id</p>
+                <aside class="notes">
+                    The ER diagram shows one customer can have many orders (1:M relationship).
+                    This is the data model we'll use for JOIN examples.
                 </aside>
             </section>
 
@@ -312,6 +590,25 @@ GROUP BY customers.customer_id, customers.name;</code></pre>
                 <aside class="notes">
                     LEFT JOIN keeps all rows from the left table, even if no match on right.
                     Useful for "find customers with no orders".
+                </aside>
+            </section>
+
+            <!-- JOIN COMPARISON -->
+            <section>
+                <h2>INNER vs LEFT JOIN Visual</h2>
+                <div class="mermaid">
+graph LR
+    A["<b>Customers</b><br/>Alice<br/>Bob<br/>Carol<br/>David"] -->|INNER JOIN| C["<b>MATCHED ROWS</b><br/>Alice<br/>Bob<br/>Carol"]
+    B["<b>Orders</b><br/>Alice-100<br/>Bob-200<br/>Carol-150"] -->|INNER JOIN| C
+    A -->|LEFT JOIN| D["<b>ALL LEFT + MATCHES</b><br/>Alice ✓<br/>Bob ✓<br/>Carol ✓<br/>David (NULL)"]
+    B -->|LEFT JOIN| D
+    style C fill:#58c4dc,stroke:#000,color:#000
+    style D fill:#ffb900,stroke:#000,color:#000
+                </div>
+                <p style="margin-top: 20px; font-size: 0.85em;"><strong>Key difference:</strong> INNER excludes unmatched rows; LEFT keeps them as NULL</p>
+                <aside class="notes">
+                    Visual comparison helps students understand the fundamental difference.
+                    INNER = intersection, LEFT = all left + intersection.
                 </aside>
             </section>
 
@@ -449,7 +746,37 @@ WHERE order_id = 999;</code></pre>
                 <h1>Session 3: Database Design & Advanced Queries</h1>
                 <p class="session-badge">Day 2 | 2.5 hours | MSSQL</p>
                 <aside class="notes">
-                    Session 3 transitions to SQL Server and covers database design principles, normalization, and advanced query techniques.
+## What We'll Cover Today
+
+Transitioning from SQLite (learning tool) to SQL Server (production database).
+
+## Three Pillars of Session 3
+
+**1. Database Design (1 hour)**
+- Normalization: Why it matters
+- Normal forms: 1NF, 2NF, 3NF
+- When to break the rules (denormalization)
+
+**2. Advanced Queries (1 hour)**
+- CTEs (Common Table Expressions): Organize complex queries
+- Subqueries: Nested queries for filtering
+- Advanced JOINs: LEFT, RIGHT, FULL OUTER
+
+**3. Practical Application (30 min)**
+- Designing a schema from scratch
+- Lab: Optimize a poorly designed schema
+- Quiz: Show understanding
+
+## Why This Matters
+
+Good design = fast queries. Bad design = slow queries that need band-aids. You're learning how to build systems that scale.
+
+## The Mindset Shift
+
+**Day 1:** How to query existing databases
+**Day 2:** How to design databases that other people will query
+
+Today you become not just a user, but an **architect**.
                 </aside>
             </section>
 
@@ -478,7 +805,36 @@ WHERE order_id = 999;</code></pre>
                     <p><strong>Good news:</strong> The SQL is the same! Same SELECT, JOINs, INSERT/UPDATE/DELETE</p>
                 </div>
                 <aside class="notes">
-                    SQL Server is industry-standard. Same syntax, but with powerful tools for optimization and management.
+## The SQL Server Difference
+
+### SQLite (Day 1)
+- **Storage:** Single `.db` file on disk
+- **Setup:** Download, open, done! (0 friction)
+- **Users:** Single person, learning environment
+- **Use case:** Mobile apps, small projects, prototyping
+
+### SQL Server (Day 2)
+- **Storage:** Enterprise server (multiple machines, backup, replication)
+- **Setup:** Complex (but powerful!) configuration
+- **Users:** Thousands of concurrent users, complex permissions
+- **Use case:** Fortune 500 companies, banks, e-commerce
+
+## The Good News
+
+**99% of SQL is identical.**
+
+```sql
+-- This works the same in SQLite, SQL Server, PostgreSQL, MySQL:
+SELECT customer_id, SUM(amount) FROM orders GROUP BY customer_id;
+```
+
+**What's different:**
+- MSSQL has `ISNULL()` instead of `IFNULL()`
+- MSSQL has `DATEDIFF()` for date math
+- MSSQL window functions syntax is slightly different
+- MSSQL has different indexing/optimization tools
+
+**Bottom line:** You already know SQL. MSSQL is just SQL + enterprise features.
                 </aside>
             </section>
 
@@ -495,8 +851,43 @@ customer_id | name  | order1  | order2  | order3
 orders: order_id, customer_id, amount</code></pre>
                 </div>
                 <aside class="notes">
-                    Normalization eliminates data duplication and maintains data integrity.
-                    The normal forms (1NF, 2NF, 3NF) are guidelines for good design.
+## The Problem with Bad Design
+
+**Unnormalized table (Denormalized):**
+```
+customer_id | name  | order1 | order2 | order3
+1           | Alice | 100    | 200    | NULL
+```
+
+**Problems:**
+- Alice's name is stored 3 times (what if she moves?)
+- If we add more orders, we need more columns (doesn't scale!)
+- What if order1 doesn't exist? Column wastes space
+
+## The Solution: Separate Tables
+
+**Customers table:**
+```
+customer_id | name
+1           | Alice
+```
+
+**Orders table:**
+```
+order_id | customer_id | amount
+1        | 1           | 100
+2        | 1           | 200
+3        | 1           | 300
+```
+
+**Benefits:**
+- ✅ Alice's name stored once (easy updates)
+- ✅ Can add unlimited orders (just add rows)
+- ✅ No wasted space (no NULL columns)
+
+## The Rule
+
+**Normalize:** One fact per place. If you need to update it, update it once, everywhere updates automatically (via foreign key relationships).
                 </aside>
             </section>
 
@@ -521,8 +912,117 @@ orders: order_id, customer_id, amount</code></pre>
                     <p style="font-size: 0.7em;"><strong>Practical tip:</strong> Most production databases follow 3NF. It's the sweet spot between structure and query simplicity.</p>
                 </div>
                 <aside class="notes">
-                    Don't worry about the formal definitions.
-                    The key idea: organize data to eliminate redundancy and maintain integrity.
+## Don't Memorize, Understand the Principle
+
+### 1NF - First Normal Form
+
+**Rule:** Each cell has only one value (no lists/arrays)
+
+**Bad:** `courses: "Math, Physics, Chemistry"`
+**Good:** Separate rows for each course
+
+### 2NF - Second Normal Form
+
+**Rule:** Non-key columns must depend on the ENTIRE key (not part of it)
+
+**Bad:** Table with key `(student_id, course_id)` but has a column `student_name` (depends only on student_id, not whole key)
+**Good:** Move `student_name` to separate `students` table
+
+### 3NF - Third Normal Form
+
+**Rule:** Non-key columns depend only on the key, not on each other
+
+**Bad:** `employees` table with columns: `employee_id`, `department_id`, `department_name` (department_name depends on department_id, not on employee_id)
+**Good:** Move `department_name` to separate `departments` table
+
+## In Practice
+
+**Most production databases are 3NF** because:
+- ✅ Eliminates redundancy (saves storage)
+- ✅ Makes updates safe (change once, applies everywhere)
+- ✅ Maintains data integrity (no contradictions)
+- ✅ Queries are still simple with JOINs
+
+**Take-home:** If you see duplicated data, that's a sign the schema needs normalization.
+                </aside>
+            </section>
+
+            <!-- NORMALIZATION FLOW -->
+            <section>
+                <h2>Normalization in Action</h2>
+                <div class="two-column">
+                    <div>
+                        <h3 style="color: #ff6b6b;">Before (Issues)</h3>
+                        <pre><code class="language-sql">student_courses
+name | courses
+-----------
+John | Math,CS,
+     | Physics</code></pre>
+                        <p style="font-size: 0.65em; margin-top: 10px;">
+                            ❌ Repeating groups<br/>
+                            ❌ Update anomalies<br/>
+                            ❌ Hard to query
+                        </p>
+                    </div>
+                    <div>
+                        <h3 style="color: #51cf66;">After 3NF (Normalized)</h3>
+                        <pre><code class="language-sql">students
+id | name
+---------
+1 | John
+
+student_course
+student_id | course_id
+departments
+id | name</code></pre>
+                        <p style="font-size: 0.65em; margin-top: 10px;">
+                            ✅ No redundancy<br/>
+                            ✅ Easy updates<br/>
+                            ✅ Flexible queries
+                        </p>
+                    </div>
+                </div>
+                <aside class="notes">
+## The Transformation Journey
+
+### Before Normalization (Denormalized Mess)
+```
+student_id | name | courses
+1          | John | Math, Physics, CS
+```
+
+**Problems:** Can't add/remove a single course without modifying the row, hard to query
+
+### After 1NF (Flatten repeating groups)
+```
+students: student_id, name
+courses: course_id, name
+student_course: student_id, course_id
+```
+
+**Better, but:** We still have redundancy if we stored course name in student_course
+
+### After 2NF (Remove partial dependencies)
+```
+Tables now include:
+- students: student_id, name
+- courses: course_id, course_name
+- student_course: student_id, course_id (junction table)
+```
+
+**Better, but:** If we had a column `student_course: student_id, course_id, course_name`, course_name depends on course_id, not on (student_id, course_id)
+
+### After 3NF (Remove transitive dependencies)
+```
+Everything is independent. Each table has one responsibility.
+```
+
+## The Key Pattern
+
+Look for this pattern → It's denormalized:
+- **Repeating columns:** `order1, order2, order3` → separate table
+- **Duplicated data:** Same name appearing multiple times → separate table
+- **Columns that depend on other columns:** Depends on non-key → separate table
                 </aside>
             </section>
 
@@ -537,18 +1037,87 @@ orders: order_id, customer_id, amount</code></pre>
                         <li>Each book has multiple copies</li>
                         <li>Track borrow/return dates</li>
                     </ul>
-                    <p style="margin-top: 20px;"><strong>Tables needed:</strong></p>
-                    <ul style="font-size: 0.7em;">
-                        <li>authors (author_id, name)</li>
-                        <li>books (book_id, title, author_id)</li>
-                        <li>copies (copy_id, book_id, isbn)</li>
-                        <li>members (member_id, name, email)</li>
-                        <li>borrows (borrow_id, copy_id, member_id, borrow_date, return_date)</li>
-                    </ul>
+                    <p style="margin-top: 20px;"><strong>How many tables do we need? What relationships?</strong></p>
                 </div>
                 <aside class="notes">
-                    This exercise shows how to think about table design.
-                    Foreign keys link tables together.
+## How to Approach Schema Design
+
+**Step 1: Identify entities** (nouns in requirements)
+- Books
+- Authors
+- Members
+- Copies (physical book instances)
+- Loans (borrow records)
+
+**Step 2: Identify relationships** (verbs)
+- Authors **write** books
+- Books **have multiple** copies
+- Members **borrow** copies
+- Loans **track** borrow/return dates
+
+**Step 3: Create tables**
+- `books` (book_id, title, ...)
+- `authors` (author_id, name, ...)
+- `book_authors` (book_id, author_id) - junction table
+- `copies` (copy_id, book_id, barcode)
+- `loans` (loan_id, copy_id, member_id, borrow_date, return_date)
+- `members` (member_id, name, email)
+
+**Step 4: Add keys**
+- Primary keys: `_id` on each table
+- Foreign keys: Link related tables
+
+## Teaching Tip
+
+Have students draw this out! Whiteboard/paper is faster than code. Ask: "What tables do we need?" Get them to think about relationships, not syntax.
+                </aside>
+            </section>
+
+            <!-- LIBRARY SCHEMA DIAGRAM -->
+            <section>
+                <h5>Library System: Complete Schema</h5>
+                <div class="mermaid">
+erDiagram
+    AUTHORS ||--o{ BOOKS : writes
+    BOOKS ||--o{ COPIES : has
+    MEMBERS ||--o{ BORROWS : performs
+    COPIES ||--o{ BORROWS : borrowed_as
+
+    AUTHORS {
+        int author_id PK
+        string name
+        string biography
+    }
+    BOOKS {
+        int book_id PK
+        int author_id FK
+        string title
+        int year_published
+    }
+    COPIES {
+        int copy_id PK
+        int book_id FK
+        string isbn
+        string status
+    }
+    MEMBERS {
+        int member_id PK
+        string name
+        string email
+    }
+    BORROWS {
+        int borrow_id PK
+        int copy_id FK
+        int member_id FK
+        date borrow_date
+        date return_date
+    }
+                </div>
+                <p style="margin-top: 15px; font-size: 0.85em;"><strong>5 tables with clear 1:M relationships</strong> - normalized & efficient design</p>
+                <aside class="notes">
+                    Notice the relationships: one author writes many books, one book has many copies, one member can borrow many times.
+                    The ER diagram makes the data model crystal clear.
+                    This is production-quality database design.
                 </aside>
             </section>
 
@@ -617,8 +1186,61 @@ WHERE total_sales > 100000;</code></pre>
                     <p style="font-size: 0.7em;"><strong>Benefit:</strong> More readable than nested subqueries. Define intermediate results with names.</p>
                 </div>
                 <aside class="notes">
-                    CTEs (WITH clause) make complex queries readable.
-                    Think of them as temporary named result sets.
+## What Is a CTE?
+
+**CTE = Common Table Expression** = temporary named result set
+
+Think of it as a **variable for query results**.
+
+## Why Use CTEs?
+
+### Before CTE (Nested Subquery - Hard to Read)
+```sql
+SELECT * FROM (
+    SELECT region, SUM(amount) as total_sales
+    FROM orders
+    GROUP BY region
+) as sales_summary
+WHERE total_sales > 100000;
+```
+
+❌ Hard to read - nested inside parens, confusing
+
+### With CTE (Much Cleaner)
+```sql
+WITH sales_summary AS (
+    SELECT region, SUM(amount) as total_sales
+    FROM orders
+    GROUP BY region
+)
+SELECT * FROM sales_summary
+WHERE total_sales > 100000;
+```
+
+✅ Reads like English! Name → Define → Use
+
+## How It Works
+
+1. **WITH clause:** "Define a temporary result set named `sales_summary`"
+2. **AS:** "Which contains this query..."
+3. **SELECT:** "Now query from that result set like it's a regular table"
+
+## Pro Tip: Multiple CTEs
+
+```sql
+WITH monthly_sales AS (...),
+     yearly_sales AS (...),
+     comparison AS (...)
+SELECT * FROM comparison;
+```
+
+Chain them together! Each CTE can reference previous ones.
+
+## Use CTEs When
+
+- ✅ Query is complex and would be hard to understand in one line
+- ✅ You need the same intermediate result multiple times
+- ✅ You want to break logic into readable steps
                 </aside>
             </section>
 
@@ -646,8 +1268,59 @@ FROM employees e
 LEFT JOIN employees m ON e.manager_id = m.employee_id;</code></pre>
                 </div>
                 <aside class="notes">
-                    Advanced JOINs handle special scenarios.
-                    Self-joins are common for hierarchical data.
+## Quick Recap of All JOINs
+
+### INNER JOIN (Session 2 review)
+Returns only matching rows from both tables
+```sql
+SELECT * FROM customers
+INNER JOIN orders ON customers.customer_id = orders.customer_id;
+```
+
+### LEFT JOIN (Session 2 review)
+Keep ALL from left table + matching from right (NULLs if no match)
+```sql
+SELECT * FROM customers
+LEFT JOIN orders ON customers.customer_id = orders.customer_id;
+-- Shows all customers, even those with no orders
+```
+
+### RIGHT JOIN
+Opposite of LEFT - keep all from right table
+
+### FULL OUTER JOIN (Advanced)
+Keep ALL from both tables (NULLs where no match)
+```sql
+SELECT * FROM customers
+FULL OUTER JOIN orders ON customers.customer_id = orders.customer_id;
+-- Shows customers with/without orders AND orders with/without customers
+```
+
+### SELF JOIN (Advanced)
+Join a table to itself (hierarchical data like manager-employee)
+```sql
+SELECT e.name as employee, m.name as manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.employee_id;
+-- e = employee, m = manager (same table!)
+```
+
+### CROSS JOIN (Advanced)
+Cartesian product - ALL combinations
+```sql
+SELECT * FROM colors CROSS JOIN sizes;
+-- If colors has 5 rows, sizes has 3 rows → result has 15 rows
+```
+
+## When to Use Each
+
+| JOIN | Use when... |
+|---|---|
+| INNER | You only want matching records |
+| LEFT | You want all from left, even if no match |
+| FULL OUTER | You want to find unmatched records in either table |
+| SELF | Hierarchical data (boss/employee, parent/child) |
+| CROSS | Generate combinations (unlikely in practice) |
                 </aside>
             </section>
 
@@ -665,7 +1338,42 @@ LEFT JOIN employees m ON e.manager_id = m.employee_id;</code></pre>
                     </ol>
                 </div>
                 <aside class="notes">
-                    This lab reinforces design thinking and advanced query techniques.
+## Lab Structure & Expectations
+
+### Part A: Design (20 minutes)
+
+Students design the library system schema from scratch.
+
+**Facilitation:**
+- Have them sketch on paper/whiteboard first (faster than SQL)
+- Ask: "What tables do you need?" (entities)
+- Ask: "How do they relate?" (relationships)
+- Check for: Primary keys, foreign keys, proper normalization
+
+**Common Mistakes:**
+- Too many tables (over-design)
+- Missing junction tables for many-to-many (books ↔ authors)
+- Storing derived data (count of borrows as column)
+
+**Intervention:** "Does that table depend only on the key, or on another column too?"
+
+### Part B: Query (30 minutes)
+
+Four queries of increasing difficulty:
+
+**Query 1:** Simple - find books by author (INNER JOIN)
+**Query 2:** Moderate - count with LEFT JOIN (shows unmatched records)
+**Query 3:** Advanced - CTE + aggregation (shows they understand organization)
+**Query 4:** Hard - conceptual thinking (FULL OUTER JOIN logic for "never borrowed")
+
+**Pacing:** If they finish early, ask them to optimize Query 1 (add WHERE, add ORDER BY, etc.)
+
+## Grading Lab
+
+Lab is formative (practice, not graded). But check:
+- Design makes sense (tables are normalized)
+- Queries run without errors
+- Results look logically correct (sanity check)
                 </aside>
             </section>
 
@@ -683,7 +1391,53 @@ LEFT JOIN employees m ON e.manager_id = m.employee_id;</code></pre>
                 </div>
                 <p style="margin-top: 30px; text-align: center; color: #58c4dc;">✓ 65%+ = Ready for Session 4</p>
                 <aside class="notes">
-                    Quiz checks conceptual understanding of design principles.
+## Quiz Grading & Facilitation
+
+### Question 1: "What's the difference between 1NF and 3NF?"
+
+**Good answer:** "1NF removes repeating groups (separate rows), 3NF removes all redundancy so no columns depend on other columns"
+
+**Accept:** Any answer showing they understand the progression toward less duplication
+
+**Common misconception:** "3NF is always better" → Actually, sometimes you denormalize for performance (teach them when)
+
+### Question 2: "Write a CTE to find top customers"
+
+**Acceptable syntax:**
+```sql
+WITH customer_orders AS (
+    SELECT customer_id, SUM(amount) as total
+    FROM orders GROUP BY customer_id
+)
+SELECT * FROM customer_orders
+WHERE total > X ORDER BY total DESC;
+```
+
+**Grading:** Is it syntactically valid? Does it use WITH...AS? Does it answer the question? ✅ = pass
+
+### Question 3: "Explain a self-join in your own words"
+
+**Key points they should mention:**
+- Same table joined to itself
+- Usually aliased differently (e.g., e and m)
+- Used for relationships within the table (parent-child, boss-employee)
+
+**Accept:** Simple explanation + example. Doesn't need perfect syntax.
+
+### Question 4: "Design tables for e-commerce"
+
+**Minimal expectation:**
+- Customers, Products, Orders, Order_Details, Categories
+- Shows primary/foreign keys
+- Demonstrates understanding of normalization (Products in separate table, not in Orders)
+
+**Bonus:** If they add shipping info, reviews, etc. Shows they're thinking about real systems!
+
+## If Students Score Low
+
+- Retest after 30-min review of weak topics
+- Focus: Normalization and CTEs are harder conceptually
+- Pair them with stronger students for Session 4
                 </aside>
             </section>
 
@@ -707,10 +1461,57 @@ SET STATISTICS IO ON;
 SELECT * FROM orders WHERE customer_id = 5;
 -- Shows cost, IO operations, etc.</code></pre>
                 </div>
+                <div class="mermaid">
+graph LR
+    A["SELECT query<br/>FROM orders<br/>WHERE customer_id = 5"] -->|Parse &amp; Validate| B["Logical<br/>Compilation"]
+    B -->|Generate plans| C["Query<br/>Optimizer"]
+    C -->|Pick best| D["Chosen<br/>Execution Plan"]
+    D -->|"Scan or Seek<br/>with/without index"| E["Fetch<br/>Data"]
+    E --> F["Return<br/>Results"]
+    style A fill:#58c4dc
+    style D fill:#51cf66
+    style F fill:#51cf66
+                </div>
                 <p style="margin-top: 20px; font-size: 0.7em;"><strong>Why read plans?</strong> → Identify bottlenecks, missing indexes, inefficient joins</p>
                 <aside class="notes">
-                    Execution plans reveal how the database fetches your data.
-                    Reading them is a key optimization skill.
+## What Is an Execution Plan?
+
+The **query optimizer's decision document** showing:
+- What steps the database will take
+- How much data it processes
+- Which indexes it uses (or doesn't!)
+- Estimated cost in CPU/IO operations
+
+### Two Types of Operations
+
+**Table Scan** (No Index) ❌ SLOW
+- Reads *every single row* in the table
+- Like reading every page of a book sequentially
+
+**Seek** (With Index) ✅ FAST
+- Jumps directly to matching rows using index
+- Like using the index to jump to page 47, then page 103
+
+### How to Read a Plan
+
+In MSSQL:
+```
+SET STATISTICS IO ON;  -- Turn on plan display
+SELECT * FROM orders WHERE customer_id = 5;
+-- Look at the output: "Table Scan" vs "Index Seek"
+```
+
+### Why This Matters
+
+An execution plan tells you:
+- Is there an expensive table scan? → Add an index!
+- Are JOINs efficient? → Check join order
+- Are there missing indexes? → Plan shows it
+- How much data is being moved? → Optimization opportunity
+
+## Teaching Tip
+
+Show students: "Same query, before and after adding an index" - they'll see the dramatic cost difference in the plan output!
                 </aside>
             </section>
 
@@ -731,8 +1532,32 @@ SELECT * FROM orders WHERE customer_id = 5;</code></pre>
                     <p style="color: #ffb900; font-size: 0.85em;"><strong>Trade-off:</strong> Indexes speed up SELECT but slow down INSERT/UPDATE (more to maintain)</p>
                 </div>
                 <aside class="notes">
-                    Indexes are critical for performance.
-                    Index frequently queried and filtered columns.
+## Why Indexes Matter
+
+**Without index:** Database scans *every single row* (Table Scan) = SLOW ❌
+**With index:** Database jumps directly to matching rows (Seek) = FAST ✅
+
+### Book Analogy
+- No index = reading every page to find a topic
+- Index = jump to page numbers in the back, then go directly to relevant pages
+
+## When to Create Indexes
+
+Index columns that are frequently:
+- In WHERE clauses (`WHERE customer_id = 5`)
+- In JOIN conditions (`ON orders.customer_id = customers.customer_id`)
+- In ORDER BY or GROUP BY
+
+## ⚠️ The Trade-Off
+
+**Pros:** SELECT queries become MUCH faster
+
+**Cons:** INSERT/UPDATE/DELETE become slower because the database must update the index too. Like updating a book's index every time you add a new page.
+
+## Rule of Thumb
+
+- Read-heavy tables (reporting, analytics) → many indexes ✅
+- Write-heavy tables (real-time data) → fewer indexes ⚠️
                 </aside>
             </section>
 
@@ -754,8 +1579,37 @@ FROM employees;</code></pre>
                     </ul>
                 </div>
                 <aside class="notes">
-                    Window functions do analytics without collapsing rows (unlike GROUP BY).
-                    They're powerful for reporting.
+## Window Functions: The Key Difference from GROUP BY
+
+**GROUP BY:** Collapses rows into groups (you lose detail)
+**Window Functions:** Keep all rows intact + add aggregate info to each row
+
+### The Query Explained
+
+```
+AVG(salary) OVER (PARTITION BY department_id)
+```
+
+- **PARTITION BY department_id** = divide employees into department groups
+- **AVG(salary)** = calculate average for each group
+- BUT keep every employee row (unlike GROUP BY which would collapse)
+
+Result: Each employee sees their salary + their department's average salary 💡
+
+### Common Window Functions
+
+- `ROW_NUMBER()` = rank each row uniquely (1, 2, 3, ...)
+- `RANK()` = allow ties (1, 1, 3, ...)
+- `LAG() / LEAD()` = access previous/next row
+- `AVG() / SUM() / COUNT()` OVER = running totals
+
+### Why This Matters
+
+Perfect for:
+- Comparing individual values to group averages
+- Finding top N per category (TOP 3 products per department)
+- Calculating trends month-over-month
+- Employee/salary rankings
                 </aside>
             </section>
 
@@ -782,8 +1636,50 @@ WHERE customer_id = @customer_id;</code></pre>
                     </div>
                 </div>
                 <aside class="notes">
-                    Views are saved queries. Stored procedures are saved scripts with logic.
-                    Both improve code reuse and security.
+## Views: Saved Queries
+
+A **View** is a saved SELECT query that acts like a virtual table.
+
+### Why Use Views?
+
+**Code Reuse**
+```
+CREATE VIEW vw_top_customers AS
+SELECT customer_id, SUM(amount) as total FROM orders GROUP BY customer_id;
+-- Now just: SELECT * FROM vw_top_customers;  (much cleaner!)
+```
+
+**Security:** Hide sensitive columns. Users query the view, not the raw table.
+
+**Simplicity:** Complex joins/aggregations get a simple name. Non-technical users can query without understanding the schema.
+
+## Stored Procedures: Saved Scripts with Logic
+
+A **Stored Procedure** is reusable code with parameters (like a function).
+
+### Why Use Stored Procs?
+
+**Parameterized queries:** Prevent SQL injection
+```
+CREATE PROCEDURE sp_GetCustomerOrders @customer_id INT AS
+SELECT * FROM orders WHERE customer_id = @customer_id;
+```
+
+**Business logic:** Multiple steps in one call
+**Performance:** Pre-compiled, runs on the server (less network traffic)
+
+## Key Difference
+
+| | View | Stored Proc |
+|---|---|---|
+| **Type** | Virtual table | Reusable code |
+| **Parameters** | No | Yes |
+| **Can update data?** | Only specific views | Yes (if designed to) |
+| **Use case** | Simplify SELECT | Complex logic, INSERT/UPDATE |
+
+## Teaching Tip
+
+"Think of a View as a 'shortcut' and a Stored Proc as a 'button that does multiple things'"
                 </aside>
             </section>
 
@@ -801,8 +1697,144 @@ WHERE customer_id = @customer_id;</code></pre>
                     </ol>
                 </div>
                 <aside class="notes">
-                    Capstone brings everything together: design, advanced queries, optimization.
-                    This is production-level work.
+## What Is This Capstone?
+
+Real-world scenario: You're hired as an **analyst for an e-commerce company** to analyze customer behavior and optimize performance.
+
+You'll use *everything from the 4 sessions*:
+- Session 1: Basic SELECT, filtering
+- Session 2: JOINs, GROUP BY
+- Session 3: CTEs, subqueries, normalization
+- Session 4: Window functions, indexes, optimization
+
+## The 4 Tasks
+
+**Task 1: Top 5 Products by Revenue**
+- Use window functions to rank products
+- GROUP BY + aggregate, then ORDER BY
+
+**Task 2: Customer Retention Rate** ⭐ Most Complex
+- Month-over-month comparison
+- Use LAG to compare months
+- Calculate percentage change
+
+**Task 3: Monthly Sales Report**
+- Combine CTE (recursive?) + window functions
+- Build timeline of sales with running totals
+
+**Task 4: Query Optimization**
+- Find slow query
+- Analyze execution plan
+- Add appropriate indexes
+
+## Teaching Emphasis
+
+This isn't about memorizing syntax. It's about **problem-solving**:
+- Break complex questions into parts
+- Build queries incrementally
+- Test results for sanity
+- Verify with data
+
+## Timeline
+
+~3 hours lab time (45 min per task + Q&A)
+Each task builds confidence for next one.
+                </aside>
+            </section>
+
+            <!-- E-COMMERCE SCHEMA -->
+            <section>
+                <h2>E-Commerce Database Schema</h2>
+                <div class="mermaid">
+erDiagram
+    CUSTOMERS ||--o{ ORDERS : places
+    PRODUCTS ||--o{ ORDER_DETAILS : "included in"
+    ORDERS ||--o{ ORDER_DETAILS : contains
+    CATEGORIES ||--o{ PRODUCTS : contains
+    CUSTOMERS ||--o{ REVIEWS : writes
+
+    CUSTOMERS {
+        int customer_id PK
+        string name
+        string email
+        date signup_date
+    }
+    PRODUCTS {
+        int product_id PK
+        int category_id FK
+        string name
+        decimal price
+        int stock_quantity
+    }
+    CATEGORIES {
+        int category_id PK
+        string category_name
+    }
+    ORDERS {
+        int order_id PK
+        int customer_id FK
+        date order_date
+        decimal total_amount
+    }
+    ORDER_DETAILS {
+        int order_detail_id PK
+        int order_id FK
+        int product_id FK
+        int quantity
+        decimal price
+    }
+    REVIEWS {
+        int review_id PK
+        int customer_id FK
+        int product_id FK
+        int rating
+        date review_date
+    }
+                </div>
+                <aside class="notes">
+## Understanding This Schema
+
+This is a **normalized, production-grade design**. Every table has a purpose.
+
+## Table Relationships
+
+**CUSTOMERS** → Places orders
+```
+customer_id (PK) → ORDERS.customer_id (FK)
+customer_id (PK) → REVIEWS.customer_id (FK)
+```
+
+**ORDERS** → Contains multiple items
+```
+order_id (PK) → ORDER_DETAILS.order_id (FK)
+customer_id (FK) → CUSTOMERS.customer_id (PK)
+```
+
+**ORDER_DETAILS** → Links products to orders (bridge table)
+```
+order_id (FK) → ORDERS.order_id (PK)
+product_id (FK) → PRODUCTS.product_id (PK)
+```
+
+**PRODUCTS** → Belong to categories
+```
+product_id (PK) → ORDER_DETAILS.product_id (FK)
+category_id (FK) → CATEGORIES.category_id (PK)
+```
+
+## Key Design Insights
+
+✅ **No data duplication** - Products stored once, reused in multiple orders
+✅ **Referential integrity** - Foreign keys ensure data consistency
+✅ **Scalable** - Can handle millions of orders/customers without bloat
+✅ **Flexible queries** - All analysis tasks start from these core tables
+
+## When Building Queries
+
+Always think about **which tables you need to join**:
+- Top products? → PRODUCTS + ORDER_DETAILS + ORDERS
+- Customer retention? → ORDERS + CUSTOMERS
+- Reviews report? → PRODUCTS + REVIEWS + CUSTOMERS
                 </aside>
             </section>
 
@@ -825,8 +1857,53 @@ WHERE rank <= 5;</code></pre>
                     <p style="font-size: 0.85em;"><strong>Skills used:</strong> CTE, JOINs, GROUP BY, Window Functions</p>
                 </div>
                 <aside class="notes">
-                    This combines multiple advanced techniques.
-                    Walk through step-by-step with the class.
+## Breaking Down This Complex Query
+
+This uses *everything*: CTEs, JOINs, GROUP BY, Window Functions, Filtering.
+
+### Step 1: The CTE (product_revenue)
+
+**What:** Calculate total revenue per product
+
+```sql
+SUM(od.quantity * od.price) as revenue
+```
+
+- `od.quantity * od.price` = line item total
+- `SUM(...)` = add up all items for this product
+- `GROUP BY product_id, name` = one row per product
+
+### Step 2: Window Function (ROW_NUMBER)
+
+```sql
+ROW_NUMBER() OVER (ORDER BY SUM(...) DESC) as rank
+```
+
+- Orders products by revenue (highest first)
+- Assigns rank: 1st product = rank 1, 2nd = rank 2, etc.
+- **Key:** Each row stays (unlike GROUP BY)
+
+### Step 3: Filter Top 5
+
+```sql
+WHERE rank <= 5
+```
+
+- Takes the ranked results
+- Returns only first 5
+
+## Teaching Approach
+
+1. **Build incrementally:** Start with `SELECT * FROM products` → add ORDER_DETAILS JOIN → add SUM()
+2. **Show intermediate results:** After each step, show output
+3. **Then add window function** to rank
+4. **Finally filter**
+
+This is how professionals write complex queries!
+
+## Common Mistake
+
+Students try to write the whole thing at once. Teach them: **Build, test, verify, then add more.**
                 </aside>
             </section>
 
@@ -849,8 +1926,38 @@ SELECT
     ROUND(100.0 * customers / LAG(customers) OVER (...), 2) as retention_pct
 FROM monthly_customers;</code></pre>
                 <aside class="notes">
-                    LAG is a window function that looks at previous row.
-                    Perfect for calculating retention.
+## What Is Retention Rate?
+
+**Retention = % of customers who returned to purchase again** from one month to the next.
+
+### Simple Example
+- Jan: 500 customers made a purchase
+- Feb: 450 of those customers came back
+- **Retention = 450/500 = 90%**
+
+- High retention (80%+) = Loyal customers ✅
+- Low retention (30-40%) = One-time buyers ❌
+
+## The LAG Function
+
+`LAG(customers)` = "look at the previous row's value"
+
+In the query:
+- Each month shows: previous month's count → current month's count
+- Then calculates: (current / previous) × 100 = retention %
+
+## ⚠️ Important: This Isn't True Retention!
+
+This query has a **critical flaw** - it doesn't track *the same customers* across months.
+
+**What it actually does:** Compares total customer counts
+**Problem:** 450 customers in Feb could be 450 *different people entirely*
+
+**True retention needs:** Customer-level tracking (customer_id across months)
+
+## Teaching Tip
+
+Ask students: "If Jan had 500 customers and Feb has 450, did 90% come back? How would you prove it?" → They'll realize you need to see the same customer_id in both months!
                 </aside>
             </section>
 
@@ -869,7 +1976,55 @@ WHERE o.customer_id = 42;</code></pre>
                     </ul>
                 </div>
                 <aside class="notes">
-                    Real optimization: diagnose, index, measure improvement.
+## The Optimization Workflow
+
+This is **real work** - not just syntax. Follow this process:
+
+### Step 1: Diagnose
+
+```sql
+SET STATISTICS IO ON;
+SELECT * FROM orders WHERE customer_id = 42;
+-- Shows: Table Scan (bad!) or Index Seek (good!)
+```
+
+### Step 2: Analyze
+
+Look at execution plan output:
+- **Table Scan** = reads 10,000,000 rows → need index ❌
+- **Index Seek** = reads 50 rows → efficient ✅
+
+### Step 3: Add Index
+
+```sql
+CREATE INDEX idx_customer_id ON orders(customer_id);
+```
+
+### Step 4: Measure Improvement
+
+Run the same diagnostic again:
+```sql
+SET STATISTICS IO ON;
+SELECT * FROM orders WHERE customer_id = 42;
+-- Now shows: Index Seek with 50 logical reads ✅
+```
+
+## What Changed?
+
+| Before | After |
+|--------|-------|
+| Table Scan | Index Seek |
+| 10M rows read | 50 rows read |
+| 45 sec query time | 0.1 sec query time |
+
+## Key Insight
+
+**Never add an index blindly.** Always:
+1. Measure current performance (baseline)
+2. Add index
+3. Measure again (proof of improvement)
+
+This is how you convince managers to keep your indexes!
                 </aside>
             </section>
 
@@ -888,7 +2043,47 @@ WHERE o.customer_id = 42;</code></pre>
                     <p style="margin-top: 15px; color: #ffb900;"><strong>✓ Complete all 4 = Capstone success!</strong></p>
                 </div>
                 <aside class="notes">
-                    Lab time - apply all techniques learned over 2 days.
+## Managing Capstone Lab Time
+
+**Total time:** 180 minutes (~3 hours). Students must self-pace through 4 tasks.
+
+## Your Role During Lab
+
+✅ **DO:**
+- Walk around, observe progress
+- Answer clarifying questions ("What does JOIN mean?" is OK)
+- Check intermediate results (did they get the right rows?)
+- Encourage incremental building (don't code the whole thing at once)
+- Point students back to slides if they forget syntax
+
+❌ **DON'T:**
+- Write code for them
+- Give away the logic/approach
+- Let them copy each other
+- Skip the "show me your result" verification step
+
+## Expected Pacing
+
+- **Task 1 (Top 5):** 45 min - Most students finish by min 40
+- **Task 2 (Retention):** 45 min - Slower, students get stuck on LAG
+- **Task 3 (Monthly):** 45 min - Many won't reach this, that's OK
+- **Task 4 (Optimization):** 30 min - Quick win for morale
+
+## If Students Get Stuck
+
+**"Can you show me your query?"** → Look at their code
+**"What do you think this part does?"** → Make them explain
+**"Try running just this part first"** → Incremental approach
+**"What columns do you have at this point?"** → Check their schema understanding
+
+## Success Criteria
+
+Student completes task when they can:
+1. Write the query (syntax OK)
+2. Get the right result (correct data)
+3. Explain what each part does (understanding)
+
+NOT just memorizing syntax!
                 </aside>
             </section>
 
@@ -908,7 +2103,45 @@ WHERE o.customer_id = 42;</code></pre>
                 </div>
                 <p style="margin-top: 30px; text-align: center; color: #58c4dc;"><strong>Success = 70%+ overall</strong></p>
                 <aside class="notes">
-                    Final assessment validates mastery across all topics.
+## Assessment Structure
+
+**Part A (Practical):** Students write 5 real queries
+- **Query 1:** Multi-table JOIN (Session 2) - 8 min
+- **Query 2:** GROUP BY + aggregates (Session 2) - 8 min
+- **Query 3:** CTE + window functions (Session 3 + 4) - 12 min
+- **Query 4:** Index analysis (Session 4) - 6 min
+- **Query 5:** Schema design (Session 3) - 6 min
+
+**Part B (Conceptual):** 4 short-answer questions
+- "What is normalization and why does it matter?" (3NF, avoiding duplication)
+- "How do you read an execution plan?" (scan vs seek, cost)
+- "When should you add an index?" (read-heavy vs write-heavy trade-off)
+- "What's the difference between a VIEW and a stored procedure?" (virtual table vs parameterized code)
+
+## Grading Rubric
+
+| Criteria | Points |
+|---|---|
+| All 5 queries execute without errors | 30 pts |
+| Results are logically correct (right data) | 40 pts |
+| Code is readable/follows conventions | 15 pts |
+| Conceptual answers show understanding | 15 pts |
+| **Total** | **100 pts** |
+| **Pass threshold** | **70%** (70 pts) |
+
+## During Assessment
+
+- **Quiet environment** - Let them focus
+- **No hints on logic** - They should know by now
+- **Can clarify syntax** - "How do you spell GROUP BY?" is OK
+- **Time warning** - "5 minutes left"
+- **Collect after time expires** - No "just a few more seconds"
+
+## If Someone Doesn't Pass
+
+- Show them their weak areas (index concepts? window functions?)
+- Offer remedial review on that topic
+- Re-assess in 1 week with same difficulty level
                 </aside>
             </section>
 
@@ -932,8 +2165,37 @@ WHERE o.customer_id = 42;</code></pre>
                     </ul>
                 </div>
                 <aside class="notes">
-                    Congratulations! You've completed the bootcamp.
-                    You now have real, production-ready SQL skills.
+## You've Earned This
+
+In just 2 days, your students have learned skills that took professionals months/years to master:
+
+✅ **Session 1:** SELECT, WHERE, ORDER BY, aggregates → Filter and explore data
+✅ **Session 2:** JOINs, GROUP BY, CRUD → Work with related data
+✅ **Session 3:** Normalization, CTEs, subqueries → Design and build complex queries
+✅ **Session 4:** Indexes, window functions, optimization → Write production-ready code
+
+## Why This Matters
+
+They can now:
+- **Query any database** (syntax is 95% the same across SQL/MSSQL/PostgreSQL)
+- **Solve real business problems** (e-commerce, analytics, reporting)
+- **Optimize their own queries** (no more waiting for DBAs!)
+- **Talk to database teams** (they understand trade-offs and bottlenecks)
+
+## Closing Thoughts (Share with Class)
+
+"SQL is a **power skill** in tech. Most developers avoid database optimization. You now know more than 80% of them. Use that superpower wisely."
+
+"The best part? You can keep learning. Every query you write teaches you something new. Curious? Try a harder problem tomorrow."
+
+## Your Homework Assignment (Optional, Encouraged)
+
+1. **Apply today:** Use what you learned at work/school this week
+2. **Read an execution plan** on a real query (even if it's just SELECT * FROM table)
+3. **Suggest an index** to your DBA (with proof from execution plan!)
+4. **Teach someone:** Explaining SQL to a friend cements your understanding
+
+This is how learning sticks.
                 </aside>
             </section>
 
@@ -963,7 +2225,7 @@ WHERE o.customer_id = 42;</code></pre>
                 <h1>Thank You!</h1>
                 <p style="margin-top: 60px; font-size: 1.3em;">Questions?</p>
                 <div class="note-box" style="margin-top: 60px;">
-                    <p><strong>Contact:</strong> [Your email/Slack]</p>
+                    <p><strong>Contact:</strong> Syafiq Shamsuddin</p>
                     <p style="margin-top: 10px;"><strong>Follow-up survey:</strong> 2 weeks post-training</p>
                 </div>
                 <aside class="notes">
@@ -977,17 +2239,60 @@ WHERE o.customer_id = 42;</code></pre>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <link rel="stylesheet" href="./notes.css">
     <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         Reveal.initialize({
             hash: true,
             plugins: [ RevealHighlight, RevealNotes ],
             transition: 'fade',
             transitionSpeed: 'default',
-            mermaid: {}
+            mermaid: {},
+            notes: {
+                // Custom stylesheet for speaker notes (dark theme)
+                // Note: This config tells the notes plugin to use our custom styles
+            }
         });
         mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+
+        // Inject dark theme stylesheet into notes window when it opens
+        Reveal.on('ready', function() {
+            // Hook into the notes plugin to inject our custom CSS into the notes window
+            setTimeout(function() {
+                // Listen for the notes window opening
+                const originalOpen = window.open;
+                window.open = function(url, name, specs) {
+                    const notesWindow = originalOpen.call(window, url, name, specs);
+
+                    if (notesWindow) {
+                        // When the notes window loads, inject our dark theme
+                        notesWindow.addEventListener('load', function() {
+                            try {
+                                const link = notesWindow.document.createElement('link');
+                                link.rel = 'stylesheet';
+                                link.href = './notes.css';
+                                notesWindow.document.head.appendChild(link);
+                            } catch (e) {
+                                console.log('Could not inject notes.css into speaker window');
+                            }
+                        }, false);
+                    }
+                    return notesWindow;
+                };
+            }, 100);
+        });
+
+        // Render markdown in speaker notes
+        document.addEventListener('DOMContentLoaded', function() {
+            const notesElements = document.querySelectorAll('aside.notes');
+            notesElements.forEach(function(notesEl) {
+                const markdown = notesEl.textContent.trim();
+                const html = marked.parse(markdown);
+                notesEl.innerHTML = html;
+            });
+        });
     </script>
 </body>
 </html>
