@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL/MSSQL 2-Day Bootcamp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/black.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <style>
+        .reveal h1, .reveal h2, .reveal h3 { text-transform: none; }
+        .reveal pre { width: 100%; font-size: 0.55em; }
+        .reveal code { padding: 2px 6px; background: rgba(255,255,255,0.1); }
+        .sql-highlight { color: #58c4dc; }
+        .session-badge { display: inline-block; padding: 5px 15px; background: #0066cc; border-radius: 20px; font-size: 0.8em; margin: 10px 0; }
+        /* Two-column layout using flexbox (fallback and enhanced version) */
+        .two-column {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .two-column > div {
+            flex: 1;
+            min-width: 0; /* Prevent overflow */
+        }
+        /* reveal.js r-hstack enhancements */
+        .r-hstack {
+            gap: 20px !important;
+        }
+        .r-hstack > * {
+            min-width: 0; /* Prevent flex children from overflowing */
+        }
+        .note-box { background: rgba(100,200,255,0.1); padding: 15px; border-left: 4px solid #58c4dc; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- INTRO SLIDE -->
+            <section>
+                <h1>SQL/MSSQL Bootcamp</h1>
+                <h3>2-Day Intensive Training</h3>
+                <p>From Fundamentals to Production</p>
+                <aside class="notes">
+                    Welcome to the SQL bootcamp! This is a 2-day intensive covering beginner to advanced SQL topics.
+                    By the end, you'll understand database design, write complex queries, and optimize for performance.
+                </aside>
+            </section>
+
+            <!-- DAY 1 OVERVIEW -->
+            <section>
+                <h2>Day 1: Foundations & Data Manipulation</h2>
+                <div style="margin-top: 40px;">
+                    <div class="session-badge">Session 1: 9:00-11:30</div>
+                    <p><strong>SQL Foundations</strong> - SELECT, WHERE, Aggregates</p>
+                </div>
+                <div style="margin-top: 30px;">
+                    <div class="session-badge">Session 2: 12:10-2:40pm</div>
+                    <p><strong>Data Manipulation</strong> - JOINs, GROUP BY, CRUD</p>
+                </div>
+                <aside class="notes">
+                    Day 1 uses SQLite with DB Browser for zero-friction setup.
+                    We build from basic queries to multi-table operations.
+                </aside>
+            </section>
+
+            <!-- DAY 2 OVERVIEW -->
+            <section>
+                <h2>Day 2: Design & Optimization</h2>
+                <div style="margin-top: 40px;">
+                    <div class="session-badge">Session 3: 9:00-11:30</div>
+                    <p><strong>Database Design</strong> - Normalization, Advanced Queries, CTEs</p>
+                </div>
+                <div style="margin-top: 30px;">
+                    <div class="session-badge">Session 4: 12:10-2:40pm</div>
+                    <p><strong>Optimization</strong> - Indexes, Window Functions, Capstone</p>
+                </div>
+                <div class="note-box">
+                    <strong>Day 2 transition:</strong> We move to MSSQL for production-grade features
+                </div>
+                <aside class="notes">
+                    Day 2 introduces SQL Server for enterprise-level optimization techniques.
+                </aside>
+            </section>
+
+            <!-- SESSION 1 TITLE -->
+            <section>
+                <h1>Session 1: SQL Foundations</h1>
+                <p class="session-badge">Day 1 | 2.5 hours | SQLite</p>
+                <aside class="notes">Session 1 covers the basics of SQL - SELECT statements, filtering, and simple aggregation.</aside>
+            </section>
+
+            <!-- REAL WORLD HOOK -->
+            <section>
+                <h2>Real-World: Netflix's Watch History</h2>
+                <div class="note-box">
+                    <p>How does Netflix know what you watched?</p>
+                    <p style="margin-top: 20px; font-size: 0.7em;">→ A table stores: <span class="sql-highlight">user_id, movie_id, watch_date, duration</span></p>
+                    <p style="margin-top: 10px; font-size: 0.7em;">→ SQL queries answer: "Show me my last 10 watches" or "What did I watch in July?"</p>
+                </div>
+                <aside class="notes">
+                    Start with familiar context - everyone uses Netflix.
+                    This shows why databases and SQL matter in real apps.
+                </aside>
+            </section>
+
+            <!-- SELECT BASICS -->
+            <section>
+                <h2>The SELECT Statement</h2>
+                <pre><code class="language-sql">SELECT column1, column2, column3
+FROM table_name;</code></pre>
+                <p style="margin-top: 30px; font-size: 0.7em;">Reads: "Give me these columns from this table"</p>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>Example:</strong> List all customers</p>
+                    <pre><code class="language-sql">SELECT customer_name, email
+FROM customers;</code></pre>
+                </div>
+                <aside class="notes">
+                    SELECT is the foundation of SQL.
+                    It always follows the same pattern: SELECT columns FROM table.
+                </aside>
+            </section>
+
+            <!-- WHERE CLAUSE -->
+            <section>
+                <h2>Filtering with WHERE</h2>
+                <pre><code class="language-sql">SELECT column1, column2
+FROM table_name
+WHERE condition;</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>Example:</strong> Orders over $100</p>
+                    <pre><code class="language-sql">SELECT order_id, amount, order_date
+FROM orders
+WHERE amount > 100;</code></pre>
+                </div>
+                <p style="margin-top: 30px; font-size: 0.85em;">
+                    <strong>Common operators:</strong> =, &gt;, &lt;, !=, AND, OR, IN, LIKE
+                </p>
+                <aside class="notes">
+                    WHERE lets us filter rows based on conditions.
+                    We can combine multiple conditions with AND/OR.
+                </aside>
+            </section>
+
+            <!-- ORDER BY -->
+            <section>
+                <h2>Sorting with ORDER BY</h2>
+                <pre><code class="language-sql">SELECT columns
+FROM table_name
+WHERE condition
+ORDER BY column ASC|DESC;</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>Example:</strong> Top 5 orders by amount</p>
+                    <pre><code class="language-sql">SELECT order_id, amount
+FROM orders
+ORDER BY amount DESC
+LIMIT 5;</code></pre>
+                </div>
+                <aside class="notes">
+                    ORDER BY sorts results.
+                    ASC = ascending (default), DESC = descending.
+                    LIMIT restricts the number of rows returned.
+                </aside>
+            </section>
+
+            <!-- AGGREGATES -->
+            <section>
+                <h2>Aggregating Data</h2>
+                <table style="margin-top: 30px; font-size: 0.85em;">
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>COUNT()</strong></td>
+                        <td>Count rows</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>SUM()</strong></td>
+                        <td>Total of numeric column</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>AVG()</strong></td>
+                        <td>Average value</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>MIN() / MAX()</strong></td>
+                        <td>Minimum / Maximum</td>
+                    </tr>
+                </table>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>Example:</strong> Total sales and average order value</p>
+                    <pre><code class="language-sql">SELECT COUNT(*) as total_orders,
+       SUM(amount) as total_sales,
+       AVG(amount) as avg_order
+FROM orders;</code></pre>
+                </div>
+                <aside class="notes">
+                    Aggregates compute across multiple rows.
+                    These are essential for analytics and reporting.
+                </aside>
+            </section>
+
+            <!-- SESSION 1 LAB -->
+            <section>
+                <h2>Hands-On: Customer Orders DB</h2>
+                <div class="note-box">
+                    <p><strong>Tables:</strong> customers, orders, products</p>
+                    <p style="margin-top: 15px;"><strong>Your tasks:</strong></p>
+                    <ol style="font-size: 0.7em; margin-top: 15px;">
+                        <li>List all customers and their email</li>
+                        <li>Find orders over $500</li>
+                        <li>Top 10 products by order count</li>
+                        <li>Count total orders in 2024</li>
+                    </ol>
+                </div>
+                <aside class="notes">
+                    Lab time: 40 minutes.
+                    This reinforces SELECT, WHERE, ORDER BY, aggregates.
+                    Start with #1, move through at your pace.
+                </aside>
+            </section>
+
+            <!-- SESSION 1 QUIZ PREVIEW -->
+            <section>
+                <h2>Session 1 Quiz (10-15 min)</h2>
+                <div class="note-box">
+                    <p><strong>Format:</strong> 60% practical (write queries) + 40% conceptual</p>
+                    <ol style="font-size: 0.7em; margin-top: 15px;">
+                        <li>Write a query: "All customers from California"</li>
+                        <li>What does COUNT(*) return?</li>
+                        <li>Write ORDER BY for "newest first"</li>
+                        <li>Explain: Why use WHERE vs LIMIT?</li>
+                    </ol>
+                </div>
+                <p style="margin-top: 30px; text-align: center; color: #58c4dc;">✓ 70%+ = Ready for Session 2</p>
+                <aside class="notes">
+                    Quiz targets core concepts from this session.
+                    It's diagnostic - helps us know if we should review.
+                </aside>
+            </section>
+
+            <!-- SESSION 2 TITLE -->
+            <section>
+                <h1>Session 2: Data Manipulation</h1>
+                <p class="session-badge">Day 1 | 2.5 hours | SQLite</p>
+                <aside class="notes">Session 2 covers JOINs, GROUP BY, and CRUD operations - working with multiple tables and modifying data.</aside>
+            </section>
+
+            <!-- GROUP BY -->
+            <section>
+                <h2>GROUP BY: Aggregate by Category</h2>
+                <pre><code class="language-sql">SELECT category, COUNT(*) as count,
+       AVG(price) as avg_price
+FROM products
+GROUP BY category;</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>Real example:</strong> Sales per region</p>
+                    <pre><code class="language-sql">SELECT region, SUM(amount) as total_sales
+FROM orders
+GROUP BY region
+ORDER BY total_sales DESC;</code></pre>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.85em; color: #ff6b6b;">
+                    ⚠️ Rule: Non-aggregated columns must be in GROUP BY
+                </p>
+                <aside class="notes">
+                    GROUP BY splits results into groups and applies aggregates per group.
+                    Essential for reporting and analytics.
+                </aside>
+            </section>
+
+            <!-- JOINS INTRO -->
+            <section>
+                <h2>JOINs: Connecting Tables</h2>
+                <p style="margin-top: 30px; font-size: 0.7em;">Tables relate through <span class="sql-highlight">keys</span></p>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>customers table:</strong> customer_id, name</p>
+                    <p><strong>orders table:</strong> order_id, customer_id, amount</p>
+                    <p style="margin-top: 15px; font-size: 0.85em;">→ customer_id links them together</p>
+                </div>
+                <aside class="notes">
+                    JOINs combine rows from multiple tables based on a relationship (key).
+                    This is core to relational databases.
+                </aside>
+            </section>
+
+            <!-- INNER JOIN -->
+            <section>
+                <h2>INNER JOIN: Only Matches</h2>
+                <pre><code class="language-sql">SELECT customers.name, orders.amount, orders.order_date
+FROM customers
+INNER JOIN orders ON customers.customer_id = orders.customer_id
+WHERE orders.amount > 100;</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p style="font-size: 0.7em;"><strong>Result:</strong> Only customer-order pairs that exist in both tables</p>
+                </div>
+                <aside class="notes">
+                    INNER JOIN = only rows where the join condition matches.
+                    If a customer has no orders, they don't appear.
+                </aside>
+            </section>
+
+            <!-- LEFT JOIN -->
+            <section>
+                <h2>LEFT JOIN: Keep All Left</h2>
+                <pre><code class="language-sql">SELECT customers.name, COUNT(orders.order_id) as order_count
+FROM customers
+LEFT JOIN orders ON customers.customer_id = orders.customer_id
+GROUP BY customers.customer_id, customers.name;</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p style="font-size: 0.7em;"><strong>Result:</strong> All customers, with order count (0 if no orders)</p>
+                </div>
+                <aside class="notes">
+                    LEFT JOIN keeps all rows from the left table, even if no match on right.
+                    Useful for "find customers with no orders".
+                </aside>
+            </section>
+
+            <!-- CRUD OPERATIONS -->
+            <section>
+                <h2>CRUD: Modifying Data</h2>
+                <table style="font-size: 0.85em; margin-top: 30px;">
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>CREATE</strong></td>
+                        <td>INSERT - add new rows</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>READ</strong></td>
+                        <td>SELECT - query data</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>UPDATE</strong></td>
+                        <td>UPDATE - modify existing rows</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>DELETE</strong></td>
+                        <td>DELETE - remove rows</td>
+                    </tr>
+                </table>
+                <aside class="notes">
+                    CRUD is the lifecycle of data - Create, Read, Update, Delete.
+                    We've covered SELECT (Read). Now: INSERT, UPDATE, DELETE.
+                </aside>
+            </section>
+
+            <!-- INSERT -->
+            <section>
+                <h2>INSERT: Adding Data</h2>
+                <pre><code class="language-sql">INSERT INTO customers (name, email, city)
+VALUES ('John Doe', 'john@example.com', 'Seattle');</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>Insert multiple rows:</strong></p>
+                    <pre><code class="language-sql">INSERT INTO products (name, price, category)
+VALUES ('Laptop', 999.99, 'Electronics'),
+       ('Mouse', 25.00, 'Electronics');</code></pre>
+                </div>
+                <aside class="notes">
+                    INSERT adds new rows to a table.
+                    Columns specified must match the VALUES order.
+                </aside>
+            </section>
+
+            <!-- UPDATE -->
+            <section>
+                <h2>UPDATE: Modifying Data</h2>
+                <pre><code class="language-sql">UPDATE customers
+SET email = 'newemail@example.com'
+WHERE customer_id = 42;</code></pre>
+                <div class="note-box" style="margin-top: 30px; background: rgba(255,100,100,0.1); border-left-color: #ff6b6b;">
+                    <p style="color: #ff6b6b;"><strong>⚠️ ALWAYS use WHERE!</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.85em;">Without WHERE, you update ALL rows!</p>
+                </div>
+                <aside class="notes">
+                    UPDATE modifies existing data.
+                    Always specify WHERE to target specific rows.
+                </aside>
+            </section>
+
+            <!-- DELETE -->
+            <section>
+                <h2>DELETE: Removing Data</h2>
+                <pre><code class="language-sql">DELETE FROM orders
+WHERE order_id = 999;</code></pre>
+                <div class="note-box" style="margin-top: 30px; background: rgba(255,100,100,0.1); border-left-color: #ff6b6b;">
+                    <p style="color: #ff6b6b;"><strong>⚠️ ALWAYS use WHERE!</strong></p>
+                    <p style="margin-top: 10px; font-size: 0.85em;">Without WHERE, you delete ALL rows! This is permanent!</p>
+                </div>
+                <aside class="notes">
+                    DELETE removes rows permanently.
+                    Always be careful - test WHERE clause with SELECT first.
+                </aside>
+            </section>
+
+            <!-- SESSION 2 LAB -->
+            <section>
+                <h2>Hands-On: Multi-Table Queries</h2>
+                <div class="note-box">
+                    <p><strong>Scenario:</strong> You're an order analyst</p>
+                    <ol style="font-size: 0.7em; margin-top: 15px;">
+                        <li>Join customers + orders, show who spent most</li>
+                        <li>Find customers with no orders (LEFT JOIN)</li>
+                        <li>Insert a new customer</li>
+                        <li>Update product price (use WHERE!)</li>
+                        <li>Count orders per region</li>
+                    </ol>
+                </div>
+                <aside class="notes">
+                    Lab: 50 minutes.
+                    Focus on JOIN syntax and WHERE safety.
+                </aside>
+            </section>
+
+            <!-- SESSION 2 QUIZ PREVIEW -->
+            <section>
+                <h2>Session 2 Quiz (10-15 min)</h2>
+                <div class="note-box">
+                    <p><strong>Topics:</strong> JOINs, GROUP BY, CRUD</p>
+                    <ol style="font-size: 0.7em; margin-top: 15px;">
+                        <li>Write INNER JOIN: customers + orders</li>
+                        <li>When would you use LEFT JOIN?</li>
+                        <li>Write GROUP BY with HAVING</li>
+                        <li>What happens if you DELETE without WHERE?</li>
+                    </ol>
+                </div>
+                <p style="margin-top: 30px; text-align: center; color: #58c4dc;">✓ 70%+ = Ready for Day 2</p>
+                <aside class="notes">
+                    Quiz checks multi-table skills and CRUD safety.
+                </aside>
+            </section>
+
+            <!-- BREAK SLIDE -->
+            <section>
+                <h1>END OF DAY 1</h1>
+                <p style="margin-top: 40px; font-size: 1.2em;">You've mastered:</p>
+                <ul style="margin-top: 30px; font-size: 1.1em;">
+                    <li>SELECT, WHERE, ORDER BY</li>
+                    <li>GROUP BY aggregations</li>
+                    <li>JOINs (INNER, LEFT)</li>
+                    <li>CRUD operations (safe practices)</li>
+                </ul>
+                <p style="margin-top: 50px; color: #58c4dc;">Tomorrow: Database design & optimization</p>
+                <aside class="notes">
+                    Great work on Day 1! You now understand the fundamentals.
+                    Day 2 builds advanced design and performance concepts.
+                </aside>
+            </section>
+
+            <!-- SESSION 3 TITLE -->
+            <section>
+                <h1>Session 3: Database Design & Advanced Queries</h1>
+                <p class="session-badge">Day 2 | 2.5 hours | MSSQL</p>
+                <aside class="notes">
+                    Session 3 transitions to SQL Server and covers database design principles, normalization, and advanced query techniques.
+                </aside>
+            </section>
+
+            <!-- MSSQL TRANSITION -->
+            <section>
+                <h2>Welcome to SQL Server</h2>
+                <div class="r-hstack">
+                    <div>
+                        <p><strong>SQLite (Day 1)</strong></p>
+                        <ul style="font-size: 0.7em;">
+                            <li>File-based</li>
+                            <li>Zero setup</li>
+                            <li>Learning focus</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p><strong>SQL Server (Day 2)</strong></p>
+                        <ul style="font-size: 0.7em;">
+                            <li>Enterprise database</li>
+                            <li>Production features</li>
+                            <li>Advanced optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p><strong>Good news:</strong> The SQL is the same! Same SELECT, JOINs, INSERT/UPDATE/DELETE</p>
+                </div>
+                <aside class="notes">
+                    SQL Server is industry-standard. Same syntax, but with powerful tools for optimization and management.
+                </aside>
+            </section>
+
+            <!-- NORMALIZATION INTRO -->
+            <section>
+                <h2>Database Design: Why Normalize?</h2>
+                <div class="note-box">
+                    <p><strong>Problem:</strong> Storing data poorly causes redundancy and errors</p>
+                    <pre style="font-size: 0.5em;"><code>customers table (BAD):
+customer_id | name  | order1  | order2  | order3
+1           | Alice | 100     | 200     | NULL</code></pre>
+                    <p style="margin-top: 15px;"><strong>Solution:</strong> Split into separate tables with keys</p>
+                    <pre style="font-size: 0.5em;"><code>customers: customer_id, name
+orders: order_id, customer_id, amount</code></pre>
+                </div>
+                <aside class="notes">
+                    Normalization eliminates data duplication and maintains data integrity.
+                    The normal forms (1NF, 2NF, 3NF) are guidelines for good design.
+                </aside>
+            </section>
+
+            <!-- 1NF/2NF/3NF -->
+            <section>
+                <h2>Normal Forms (Simplified)</h2>
+                <table style="font-size: 0.8em; margin-top: 30px;">
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>1NF</strong></td>
+                        <td>All columns have single values (no repeating groups)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>2NF</strong></td>
+                        <td>No partial dependencies (all non-key columns depend on entire key)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>3NF</strong></td>
+                        <td>No transitive dependencies (non-key columns don't depend on other non-key columns)</td>
+                    </tr>
+                </table>
+                <div class="note-box" style="margin-top: 30px; background: rgba(100,200,255,0.05);">
+                    <p style="font-size: 0.7em;"><strong>Practical tip:</strong> Most production databases follow 3NF. It's the sweet spot between structure and query simplicity.</p>
+                </div>
+                <aside class="notes">
+                    Don't worry about the formal definitions.
+                    The key idea: organize data to eliminate redundancy and maintain integrity.
+                </aside>
+            </section>
+
+            <!-- DESIGN EXAMPLE -->
+            <section>
+                <h2>Design Exercise: Library System</h2>
+                <div class="note-box">
+                    <p><strong>Requirements:</strong></p>
+                    <ul style="font-size: 0.7em;">
+                        <li>Track books and authors</li>
+                        <li>Members can borrow books</li>
+                        <li>Each book has multiple copies</li>
+                        <li>Track borrow/return dates</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><strong>Tables needed:</strong></p>
+                    <ul style="font-size: 0.7em;">
+                        <li>authors (author_id, name)</li>
+                        <li>books (book_id, title, author_id)</li>
+                        <li>copies (copy_id, book_id, isbn)</li>
+                        <li>members (member_id, name, email)</li>
+                        <li>borrows (borrow_id, copy_id, member_id, borrow_date, return_date)</li>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    This exercise shows how to think about table design.
+                    Foreign keys link tables together.
+                </aside>
+            </section>
+
+            <!-- PRIMARY & FOREIGN KEYS -->
+            <section>
+                <h2>Keys: The Glue That Binds</h2>
+                <table style="font-size: 0.85em; margin-top: 30px;">
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>Primary Key (PK)</strong></td>
+                        <td>Unique identifier for each row</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>Foreign Key (FK)</strong></td>
+                        <td>References a PK in another table</td>
+                    </tr>
+                </table>
+                <pre style="margin-top: 30px;"><code class="language-sql">CREATE TABLE authors (
+    author_id INT PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE books (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    author_id INT FOREIGN KEY REFERENCES authors(author_id)
+);</code></pre>
+                <aside class="notes">
+                    PK ensures uniqueness within a table.
+                    FK ensures referential integrity across tables.
+                </aside>
+            </section>
+
+            <!-- SUBQUERIES -->
+            <section>
+                <h2>Subqueries: Queries Within Queries</h2>
+                <pre><code class="language-sql">SELECT name, salary
+FROM employees
+WHERE salary > (SELECT AVG(salary) FROM employees);</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p style="font-size: 0.7em;"><strong>Example:</strong> Find books borrowed more than average</p>
+                    <pre style="font-size: 0.5em;"><code class="language-sql">SELECT book_id, title
+FROM books
+WHERE book_id IN (
+    SELECT book_id FROM borrows
+    GROUP BY book_id
+    HAVING COUNT(*) > (SELECT AVG(borrow_count) FROM ...)
+);</code></pre>
+                </div>
+                <aside class="notes">
+                    Subqueries let you nest SELECT statements.
+                    Useful for complex filtering and calculations.
+                </aside>
+            </section>
+
+            <!-- CTEs -->
+            <section>
+                <h2>CTEs: Common Table Expressions</h2>
+                <pre><code class="language-sql">WITH sales_summary AS (
+    SELECT region, SUM(amount) as total_sales
+    FROM orders
+    GROUP BY region
+)
+SELECT * FROM sales_summary
+WHERE total_sales > 100000;</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p style="font-size: 0.7em;"><strong>Benefit:</strong> More readable than nested subqueries. Define intermediate results with names.</p>
+                </div>
+                <aside class="notes">
+                    CTEs (WITH clause) make complex queries readable.
+                    Think of them as temporary named result sets.
+                </aside>
+            </section>
+
+            <!-- ADVANCED JOINS -->
+            <section>
+                <h2>Advanced JOINs</h2>
+                <table style="font-size: 0.8em; margin-top: 30px;">
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>FULL OUTER JOIN</strong></td>
+                        <td>All rows from both tables (with NULLs where no match)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>CROSS JOIN</strong></td>
+                        <td>Cartesian product - all combinations</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #58c4dc;">
+                        <td><strong>SELF JOIN</strong></td>
+                        <td>Join a table to itself (e.g., employee-manager)</td>
+                    </tr>
+                </table>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p style="font-size: 0.85em;"><strong>Self JOIN example:</strong> Find each employee and their manager</p>
+                    <pre style="font-size: 0.7em;"><code class="language-sql">SELECT e.name as employee, m.name as manager
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.employee_id;</code></pre>
+                </div>
+                <aside class="notes">
+                    Advanced JOINs handle special scenarios.
+                    Self-joins are common for hierarchical data.
+                </aside>
+            </section>
+
+            <!-- SESSION 3 LAB -->
+            <section>
+                <h2>Hands-On: Design & Query</h2>
+                <div class="note-box">
+                    <p><strong>Part A - Design (20 min):</strong> Design library system schema</p>
+                    <p style="margin-top: 15px;"><strong>Part B - Query (30 min):</strong></p>
+                    <ol style="font-size: 0.7em;">
+                        <li>Find all books by a specific author</li>
+                        <li>Count active borrows per member (LEFT JOIN)</li>
+                        <li>Use CTE to find frequently borrowed books</li>
+                        <li>Find members who haven't borrowed yet (FULL OUTER JOIN concept)</li>
+                    </ol>
+                </div>
+                <aside class="notes">
+                    This lab reinforces design thinking and advanced query techniques.
+                </aside>
+            </section>
+
+            <!-- SESSION 3 QUIZ PREVIEW -->
+            <section>
+                <h2>Session 3 Quiz (10-15 min)</h2>
+                <div class="note-box">
+                    <p><strong>Topics:</strong> Normalization, Keys, CTEs, Advanced JOINs</p>
+                    <ol style="font-size: 0.7em; margin-top: 15px;">
+                        <li>What's the difference between 1NF and 3NF?</li>
+                        <li>Write a CTE to find top customers</li>
+                        <li>Explain a self-join in your own words</li>
+                        <li>Design tables for an e-commerce system</li>
+                    </ol>
+                </div>
+                <p style="margin-top: 30px; text-align: center; color: #58c4dc;">✓ 65%+ = Ready for Session 4</p>
+                <aside class="notes">
+                    Quiz checks conceptual understanding of design principles.
+                </aside>
+            </section>
+
+            <!-- SESSION 4 TITLE -->
+            <section>
+                <h1>Session 4: Optimization & Real-World</h1>
+                <p class="session-badge">Day 2 | 2.5 hours | MSSQL</p>
+                <aside class="notes">
+                    Session 4 covers performance optimization: indexes, execution plans, window functions, and the capstone project.
+                </aside>
+            </section>
+
+            <!-- EXECUTION PLANS -->
+            <section>
+                <h2>Execution Plans: How SQL Works</h2>
+                <div class="note-box">
+                    <p><strong>Query → Optimizer → Execution Plan</strong></p>
+                    <p style="margin-top: 20px; font-size: 0.7em;">The optimizer decides the best way to fetch data. We can see its plan!</p>
+                    <pre style="margin-top: 15px; font-size: 0.5em;"><code>-- In MSSQL:
+SET STATISTICS IO ON;
+SELECT * FROM orders WHERE customer_id = 5;
+-- Shows cost, IO operations, etc.</code></pre>
+                </div>
+                <p style="margin-top: 20px; font-size: 0.7em;"><strong>Why read plans?</strong> → Identify bottlenecks, missing indexes, inefficient joins</p>
+                <aside class="notes">
+                    Execution plans reveal how the database fetches your data.
+                    Reading them is a key optimization skill.
+                </aside>
+            </section>
+
+            <!-- INDEXES -->
+            <section>
+                <h2>Indexes: Speed Up Queries</h2>
+                <div class="note-box">
+                    <p><strong>Analogy:</strong> Index in a book vs scanning every page</p>
+                    <p style="margin-top: 20px; font-size: 0.7em;">Indexes are sorted lookups on columns</p>
+                </div>
+                <pre style="margin-top: 30px;"><code class="language-sql">-- Create an index on frequently queried columns
+CREATE INDEX idx_customer_id ON orders(customer_id);
+CREATE INDEX idx_order_date ON orders(order_date);
+
+-- Now queries using these columns are much faster!
+SELECT * FROM orders WHERE customer_id = 5;</code></pre>
+                <div class="note-box" style="margin-top: 20px; background: rgba(255,200,100,0.1); border-left-color: #ffb900;">
+                    <p style="color: #ffb900; font-size: 0.85em;"><strong>Trade-off:</strong> Indexes speed up SELECT but slow down INSERT/UPDATE (more to maintain)</p>
+                </div>
+                <aside class="notes">
+                    Indexes are critical for performance.
+                    Index frequently queried and filtered columns.
+                </aside>
+            </section>
+
+            <!-- WINDOW FUNCTIONS -->
+            <section>
+                <h2>Window Functions: Advanced Analytics</h2>
+                <pre><code class="language-sql">SELECT
+    employee_id,
+    salary,
+    AVG(salary) OVER (PARTITION BY department_id) as dept_avg,
+    ROW_NUMBER() OVER (ORDER BY salary DESC) as salary_rank
+FROM employees;</code></pre>
+                <div class="note-box" style="margin-top: 30px;">
+                    <p style="font-size: 0.7em;"><strong>What's happening:</strong></p>
+                    <ul style="font-size: 0.85em;">
+                        <li>PARTITION BY = divide into groups</li>
+                        <li>ORDER BY = sort within groups</li>
+                        <li>ROW_NUMBER() = rank each row</li>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    Window functions do analytics without collapsing rows (unlike GROUP BY).
+                    They're powerful for reporting.
+                </aside>
+            </section>
+
+            <!-- VIEWS & STORED PROCS -->
+            <section>
+                <h2>Views & Stored Procedures</h2>
+                <div class="r-hstack">
+                    <div>
+                        <p><strong>Views</strong></p>
+                        <pre style="font-size: 0.7em;"><code class="language-sql">CREATE VIEW vw_top_customers AS
+SELECT customer_id, SUM(amount) as total
+FROM orders
+GROUP BY customer_id;</code></pre>
+                        <p style="font-size: 0.8em; margin-top: 10px;">Reusable queries</p>
+                    </div>
+                    <div>
+                        <p><strong>Stored Procs</strong></p>
+                        <pre style="font-size: 0.7em;"><code class="language-sql">CREATE PROCEDURE sp_GetCustomerOrders
+    @customer_id INT
+AS
+SELECT * FROM orders
+WHERE customer_id = @customer_id;</code></pre>
+                        <p style="font-size: 0.8em; margin-top: 10px;">Reusable logic with parameters</p>
+                    </div>
+                </div>
+                <aside class="notes">
+                    Views are saved queries. Stored procedures are saved scripts with logic.
+                    Both improve code reuse and security.
+                </aside>
+            </section>
+
+            <!-- CAPSTONE SETUP -->
+            <section>
+                <h2>Capstone Project: E-Commerce Analyst</h2>
+                <div class="note-box">
+                    <p><strong>Scenario:</strong> You're an analyst for an e-commerce company</p>
+                    <p style="margin-top: 20px; font-size: 0.7em;"><strong>Your tasks:</strong></p>
+                    <ol style="font-size: 0.7em; margin-top: 15px;">
+                        <li>Find top 5 products by revenue (with window rank)</li>
+                        <li>Calculate customer retention rate (month-over-month)</li>
+                        <li>Build a monthly sales report (CTE + window functions)</li>
+                        <li>Identify a slow query and optimize it (indexes)</li>
+                    </ol>
+                </div>
+                <aside class="notes">
+                    Capstone brings everything together: design, advanced queries, optimization.
+                    This is production-level work.
+                </aside>
+            </section>
+
+            <!-- CAPSTONE WALKTHROUGH -->
+            <section>
+                <h2>Capstone: Task 1 - Top Products</h2>
+                <pre><code class="language-sql">WITH product_revenue AS (
+    SELECT
+        p.product_id,
+        p.name,
+        SUM(od.quantity * od.price) as revenue,
+        ROW_NUMBER() OVER (ORDER BY SUM(...) DESC) as rank
+    FROM products p
+    INNER JOIN order_details od ON p.product_id = od.product_id
+    GROUP BY p.product_id, p.name
+)
+SELECT * FROM product_revenue
+WHERE rank <= 5;</code></pre>
+                <div class="note-box" style="margin-top: 20px;">
+                    <p style="font-size: 0.85em;"><strong>Skills used:</strong> CTE, JOINs, GROUP BY, Window Functions</p>
+                </div>
+                <aside class="notes">
+                    This combines multiple advanced techniques.
+                    Walk through step-by-step with the class.
+                </aside>
+            </section>
+
+            <!-- CAPSTONE RETENTION -->
+            <section>
+                <h2>Capstone: Task 2 - Retention Rate</h2>
+                <pre><code class="language-sql">-- Month-over-month retention
+WITH monthly_customers AS (
+    SELECT
+        YEAR(order_date) as year,
+        MONTH(order_date) as month,
+        COUNT(DISTINCT customer_id) as customers
+    FROM orders
+    GROUP BY YEAR(order_date), MONTH(order_date)
+)
+SELECT
+    month,
+    LAG(customers) OVER (ORDER BY year, month) as prev_month,
+    customers as curr_month,
+    ROUND(100.0 * customers / LAG(customers) OVER (...), 2) as retention_pct
+FROM monthly_customers;</code></pre>
+                <aside class="notes">
+                    LAG is a window function that looks at previous row.
+                    Perfect for calculating retention.
+                </aside>
+            </section>
+
+            <!-- CAPSTONE OPTIMIZATION -->
+            <section>
+                <h2>Capstone: Task 4 - Optimization</h2>
+                <div class="note-box">
+                    <p><strong>Problem:</strong> This query is slow!</p>
+                    <pre style="font-size: 0.5em;"><code class="language-sql">SELECT * FROM orders o
+WHERE o.customer_id = 42;</code></pre>
+                    <p style="margin-top: 15px;"><strong>Solution:</strong> Check execution plan</p>
+                    <ul style="font-size: 0.7em; margin-top: 10px;">
+                        <li>Is there a full table scan? → Add index on customer_id</li>
+                        <li>Are there missing indexes? → CREATE INDEX</li>
+                        <li>Are JOINs inefficient? → Reorder or add hints</li>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    Real optimization: diagnose, index, measure improvement.
+                </aside>
+            </section>
+
+            <!-- SESSION 4 LAB -->
+            <section>
+                <h2>Hands-On: Capstone Project</h2>
+                <div class="note-box">
+                    <p><strong>Time: 60 minutes (full lab)</strong></p>
+                    <p style="margin-top: 15px;"><strong>Complete the 4 capstone tasks:</strong></p>
+                    <ol style="font-size: 0.7em;">
+                        <li>Top 5 products (45 min)</li>
+                        <li>Retention rate (45 min)</li>
+                        <li>Monthly report (45 min)</li>
+                        <li>Query optimization (30 min)</li>
+                    </ol>
+                    <p style="margin-top: 15px; color: #ffb900;"><strong>✓ Complete all 4 = Capstone success!</strong></p>
+                </div>
+                <aside class="notes">
+                    Lab time - apply all techniques learned over 2 days.
+                </aside>
+            </section>
+
+            <!-- SESSION 4 QUIZ / FINAL ASSESSMENT -->
+            <section>
+                <h2>Final Assessment</h2>
+                <div class="note-box">
+                    <p><strong>Part A - Practical (40 min):</strong> Write 5 queries covering:</p>
+                    <ul style="font-size: 0.85em; margin-top: 10px;">
+                        <li>JOIN multiple tables</li>
+                        <li>GROUP BY with aggregates</li>
+                        <li>CTE + window functions</li>
+                        <li>Index optimization</li>
+                        <li>Design a schema</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><strong>Part B - Conceptual (10 min):</strong> 4 short-answer questions on normalization, execution plans, etc.</p>
+                </div>
+                <p style="margin-top: 30px; text-align: center; color: #58c4dc;"><strong>Success = 70%+ overall</strong></p>
+                <aside class="notes">
+                    Final assessment validates mastery across all topics.
+                </aside>
+            </section>
+
+            <!-- WRAP UP -->
+            <section>
+                <h1>You're Now a SQL Developer!</h1>
+                <ul style="margin-top: 40px; font-size: 1.1em;">
+                    <li>✅ Write complex queries with JOINs, CTEs, window functions</li>
+                    <li>✅ Design normalized database schemas</li>
+                    <li>✅ Optimize queries with indexes</li>
+                    <li>✅ Read execution plans</li>
+                    <li>✅ Apply SQL to real business problems</li>
+                </ul>
+                <div class="note-box" style="margin-top: 50px;">
+                    <p><strong>Next Steps:</strong></p>
+                    <ul style="font-size: 0.95em;">
+                        <li>Practice daily with small datasets</li>
+                        <li>Join SQL communities (forums, Discord)</li>
+                        <li>Read execution plans on your own queries</li>
+                        <li>Build a side project using SQL</li>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    Congratulations! You've completed the bootcamp.
+                    You now have real, production-ready SQL skills.
+                </aside>
+            </section>
+
+            <!-- RESOURCES -->
+            <section>
+                <h2>Resources for Continued Learning</h2>
+                <div style="text-align: left; margin-top: 30px;">
+                    <p><strong>Free Resources:</strong></p>
+                    <ul style="font-size: 0.7em;">
+                        <li><a href="https://sqlzoo.net" style="color: #58c4dc;">SQLZoo</a> - Interactive SQL tutorials</li>
+                        <li><a href="https://leetcode.com/problemset/all/?topicSlugs=sql" style="color: #58c4dc;">LeetCode SQL</a> - SQL practice problems</li>
+                        <li><a href="https://www.sqlteaching.com/" style="color: #58c4dc;">SQL Teaching</a> - Hands-on lessons</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><strong>SQL Server Specific:</strong></p>
+                    <ul style="font-size: 0.7em;">
+                        <li>Microsoft SQL Server docs</li>
+                        <li>Azure Data Studio (free IDE)</li>
+                    </ul>
+                </div>
+                <aside class="notes">
+                    Point learners to resources for continued practice.
+                </aside>
+            </section>
+
+            <!-- THANK YOU -->
+            <section>
+                <h1>Thank You!</h1>
+                <p style="margin-top: 60px; font-size: 1.3em;">Questions?</p>
+                <div class="note-box" style="margin-top: 60px;">
+                    <p><strong>Contact:</strong> [Your email/Slack]</p>
+                    <p style="margin-top: 10px;"><strong>Follow-up survey:</strong> 2 weeks post-training</p>
+                </div>
+                <aside class="notes">
+                    End of presentation. Open for questions and feedback.
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/highlight/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/plugin/notes/notes.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js-menu@2.1.0/menu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            plugins: [ RevealHighlight, RevealNotes ],
+            transition: 'fade',
+            transitionSpeed: 'default',
+            mermaid: {}
+        });
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</body>
+</html>
